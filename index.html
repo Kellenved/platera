@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platera</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Logo, Navigation, Cart -->
+         <a href="/" class="logo">Platera</a>
+
+         <nav>
+            <a href="#">Menu</a>
+            <a href="#">About</a>
+         </nav>
+
+         <button class="cart-button" type="button">
+            Cart
+         </button>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <!-- Heading, Description, Search -->
+             <h1>Good food, made simple.</h1>
+
+             <p>
+                Order your favorite meals and have them delivered to your door.
+             </p>
+
+             <form>
+                
+                <label for="food-search">Search for food</label>
+
+                <input 
+                    type="search"
+                    id="food-search"
+                    name="q"
+                    placeholder="Search for food..."
+                >
+
+                <button type="submit">Search</button>
+             </form>
+        </section>
+
+        <section class="categories">
+            <!-- All, Pizza, Burgers, Pasta, Drinks -->
+             <h2>Browse categories</h2>
+
+             <div class="category-list">
+                <button type="button" data-category="all">All</button>
+                <button type="button" data-category="pizza">Pizza</button>
+                <button type="button" data-category="burgers">Burgers</button>
+                <button type="button" data-category="pasta">Pasta</button>
+                <button type="button" data-category="drinks">Drinks</button>
+             </div>
+        </section>
+
+        <section class="food">
+            <!-- Food cards -->
+            <h2>Popular dishes</h2>
+
+            <div class="food-grid">
+                <!-- <article class="food-card">
+                    <img
+                        src="./assets/images/pizza.jpg"
+                        alt="Margherita pizza with tomatoes, mozzarella and basil"
+                    >
+
+                    <div class="food-card-content">
+                        <p class="food-category">Pizza</p>
+
+                        <h3>Pizza Margherita</h3>
+
+                        <p>Fresh tomatoes, mozzarella and basil.</p>
+
+                        <div class="food-card-footer">
+                            <data value="12.99">€12.99</data>
+
+                            <button type="button" data-food-id="1">
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </article> -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
