@@ -38,11 +38,11 @@ const foods = [
 
 const foodGrid = document.querySelector(".food-grid");
 
-function renderFoods(){
+function renderFoods(foodList){
 
     foodGrid.innerHTML = "";
 
-    foods.forEach((food) => {
+    foodList.forEach((food) => {
         const card = document.createElement("article");
 
         card.classList.add("food-card");
@@ -67,20 +67,30 @@ function renderFoods(){
                         Add to cart
                     </button>
                 </div>
-            </div>`;
+            </div>
+        `;
 
         foodGrid.appendChild(card);
     });
 }
 
-renderFoods();
+renderFoods(foods);
 
 const categoryButtons = document.querySelectorAll("[data-category]");
 
-console.log(categoryButtons);
-
 categoryButtons.forEach((button) =>{
     button.addEventListener("click", () =>{
-        console.log(button.dataset.category);
+
+        const selectedCategory = button.dataset.category;
+
+        if (selectedCategory === "all"){
+            renderFoods(foods);
+        } else{
+            const filteredFoods = foods.filter((food) =>{
+                return food.category === selectedCategory;
+            });
+            
+            renderFoods(filteredFoods);
+        }
     });
 });
