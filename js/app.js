@@ -42,6 +42,11 @@ function renderFoods(foodList){
 
     foodGrid.innerHTML = "";
 
+    if(foodList.length === 0){
+        foodGrid.innerHTML = `<p>No dishes found.</p>`;
+        return;
+    }
+
     foodList.forEach((food) => {
         const card = document.createElement("article");
 
@@ -78,6 +83,9 @@ renderFoods(foods);
 
 const categoryButtons = document.querySelectorAll("[data-category]");
 
+const searchForm = document.querySelector(".search-form");
+const searchInput = document.querySelector("#food-search");
+
 categoryButtons.forEach((button) =>{
     button.addEventListener("click", () =>{
 
@@ -93,4 +101,16 @@ categoryButtons.forEach((button) =>{
             renderFoods(filteredFoods);
         }
     });
+});
+
+searchForm.addEventListener("submit", (event) =>{
+    event.preventDefault();
+
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    const filteredFoods = foods.filter((food) =>{
+        return food.name.toLowerCase().includes(searchTerm);
+    });
+
+    renderFoods(filteredFoods);
 });
