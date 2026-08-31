@@ -36,6 +36,8 @@ const foods = [
     }
 ];
 
+const cart = [];
+
 const foodGrid = document.querySelector(".food-grid");
 
 function renderFoods(foodList){
@@ -113,4 +115,37 @@ searchForm.addEventListener("submit", (event) =>{
     });
 
     renderFoods(filteredFoods);
+});
+
+foodGrid.addEventListener("click", (event) => {
+    const addButton = event.target.closest("[data-food-id]");
+
+    if(!addButton){
+        return;
+    }
+
+    const foodId = Number(addButton.dataset.foodId);
+    
+    const food = foods.find((food)=>{
+        return food.id === foodId;
+        
+    });
+
+    if(!food){
+        return;
+    }
+
+    const existingCartItem = cart.find((item) =>{
+        return item.id === food.id;
+    });
+
+    if(existingCartItem){
+        existingCartItem.quantity++;
+    } else{
+        cart.push({
+            ...food,
+            quantity: 1
+        });
+    }
+    console.log(cart);
 });
