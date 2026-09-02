@@ -39,6 +39,7 @@ const foods = [
 const cart = [];
 
 const foodGrid = document.querySelector(".food-grid");
+const cartButton = document.querySelector(".cart-button");
 
 function renderFoods(foodList){
 
@@ -117,6 +118,14 @@ searchForm.addEventListener("submit", (event) =>{
     renderFoods(filteredFoods);
 });
 
+function updateCartCount() {
+    const totalItems = cart.reduce((total, item) => {
+        return total + item.quantity;
+    }, 0);
+
+    cartButton.textContent = `Cart (${totalItems})`;
+}
+
 foodGrid.addEventListener("click", (event) => {
     const addButton = event.target.closest("[data-food-id]");
 
@@ -147,5 +156,8 @@ foodGrid.addEventListener("click", (event) => {
             quantity: 1
         });
     }
+
+    updateCartCount();
+    
     console.log(cart);
 });
