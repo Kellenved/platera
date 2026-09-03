@@ -41,6 +41,11 @@ const cart = [];
 const foodGrid = document.querySelector(".food-grid");
 const cartButton = document.querySelector(".cart-button");
 
+const cartItems = document.querySelector(".cart-items");
+const cartTotal = document.querySelector(".cart-total");
+
+const cartPanel = document.querySelector(".cart-panel");
+
 function renderFoods(foodList){
 
     foodGrid.innerHTML = "";
@@ -83,6 +88,35 @@ function renderFoods(foodList){
 }
 
 renderFoods(foods);
+updateCartCount();
+
+function renderCart() {
+    cartItems.innerHTML = "";
+
+    cart.forEach((item) => {
+        const cartItem = document.createElement("div");
+
+        cartItem.classList.add("cart-item");
+
+        cartItem.innerHTML = `
+            <p>${item.name}</p>
+            <p>€${item.price.toFixed(2)}</p>
+            <p>Quantity: ${item.quantity}</p>
+        `;
+
+        cartItems.appendChild(cartItem);
+    });
+
+    const total = cart.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+
+    cartTotal.textContent = `Total: €${total.toFixed(2)}`;
+}
+
+cartButton.addEventListener("click", () => {
+    cartPanel.classList.toggle("hidden");
+});
 
 const categoryButtons = document.querySelectorAll("[data-category]");
 
@@ -158,6 +192,7 @@ foodGrid.addEventListener("click", (event) => {
     }
 
     updateCartCount();
+    renderCart();
     
     console.log(cart);
 });

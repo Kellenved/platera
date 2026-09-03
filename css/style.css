@@ -128,3 +128,23 @@ nav a{
     flex-wrap: wrap;
     gap: 8px;
 }
+
+.cart-panel{
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 320px;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hidden{
+    display: none;
+}
