@@ -121,6 +121,13 @@ nav a{
     .hero form button{
         width: 100%;
     }
+
+    .cart-panel{
+        left: 5%;
+        right: 5%;
+        width: auto;
+        top: 70px;
+    }
 }
 
 .category-list{

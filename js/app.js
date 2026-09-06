@@ -36,7 +36,7 @@ const foods = [
     }
 ];
 
-const cart = [];
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const foodGrid = document.querySelector(".food-grid");
 const cartButton = document.querySelector(".cart-button");
@@ -87,11 +87,20 @@ function renderFoods(foodList){
     });
 }
 
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
 renderFoods(foods);
 updateCartCount();
+renderCart();
 
 function renderCart() {
     cartItems.innerHTML = "";
+
+    if (cart.length === 0) {
+    cartItems.innerHTML = `<p>Your cart is empty.</p>`;
+    }
 
     cart.forEach((item) => {
         const cartItem = document.createElement("div");
@@ -101,7 +110,34 @@ function renderCart() {
         cartItem.innerHTML = `
             <p>${item.name}</p>
             <p>€${item.price.toFixed(2)}</p>
-            <p>Quantity: ${item.quantity}</p>
+
+            <div class="cart-item-controls">
+                <button
+                    type="button"
+                    data-cart-action="decrease"
+                    data-cart-id="${item.id}"
+                >
+                    −
+                </button>
+
+                <span>${item.quantity}</span>
+
+                <button
+                    type="button"
+                    data-cart-action="increase"
+                    data-cart-id="${item.id}"
+                >
+                    +
+                </button>
+
+                <button
+                    type="button"
+                    data-cart-action="remove"
+                    data-cart-id="${item.id}"
+                >
+                    Remove
+                </button>
+            </div>
         `;
 
         cartItems.appendChild(cartItem);
@@ -113,6 +149,53 @@ function renderCart() {
 
     cartTotal.textContent = `Total: €${total.toFixed(2)}`;
 }
+
+cartItems.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-cart-action]");
+
+    if (!button) {
+        return;
+    }
+
+    const itemId = Number(button.dataset.cartId);
+    const action = button.dataset.cartAction;
+
+    const cartItem = cart.find((item) => {
+        return item.id === itemId;
+    });
+
+    if (!cartItem) {
+        return;
+    }
+
+    if (action === "increase") {
+        cartItem.quantity++;
+    }
+
+    if (action === "decrease") {
+    if (cartItem.quantity > 1) {
+        cartItem.quantity--;
+    } else {
+        const itemIndex = cart.findIndex((item) => {
+            return item.id === itemId;
+        });
+
+        cart.splice(itemIndex, 1);
+    }
+}
+
+    if (action === "remove") {
+        const itemIndex = cart.findIndex((item) => {
+            return item.id === itemId;
+        });
+
+        cart.splice(itemIndex, 1);
+    }
+
+    updateCartCount();
+    renderCart();
+    saveCart();
+});
 
 cartButton.addEventListener("click", () => {
     cartPanel.classList.toggle("hidden");
@@ -193,6 +276,7 @@ foodGrid.addEventListener("click", (event) => {
 
     updateCartCount();
     renderCart();
+    saveCart();
     
     console.log(cart);
 });
