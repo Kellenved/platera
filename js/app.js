@@ -38,6 +38,13 @@ const foods = [
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+const checkoutButton = document.querySelector(".checkout-button");
+const checkoutPanel = document.querySelector(".checkout-panel");
+const checkoutClose = document.querySelector(".checkout-close");
+const checkoutSummary = document.querySelector(".checkout-summary");
+const checkoutForm = document.querySelector(".checkout-form");
+const orderMessage = document.querySelector(".order-message");
+
 const foodGrid = document.querySelector(".food-grid");
 const cartButton = document.querySelector(".cart-button");
 
@@ -95,6 +102,33 @@ renderFoods(foods);
 updateCartCount();
 renderCart();
 
+function renderCheckout() {
+    checkoutSummary.innerHTML = "";
+
+    cart.forEach((item) => {
+        const summaryItem = document.createElement("p");
+
+        summaryItem.textContent =
+            `${item.name} × ${item.quantity} — €${(item.price * item.quantity).toFixed(2)}`;
+
+        checkoutSummary.appendChild(summaryItem);
+    });
+
+    const total = getCartTotal();
+
+    const totalElement = document.createElement("strong");
+
+    totalElement.textContent = `Total: €${total.toFixed(2)}`;
+
+    checkoutSummary.appendChild(totalElement);
+}
+
+function getCartTotal() {
+    return cart.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+};
+
 function renderCart() {
     cartItems.innerHTML = "";
 
@@ -143,12 +177,44 @@ function renderCart() {
         cartItems.appendChild(cartItem);
     });
 
-    const total = cart.reduce((sum, item) => {
-        return sum + item.price * item.quantity;
-    }, 0);
+    const total = getCartTotal();
 
     cartTotal.textContent = `Total: €${total.toFixed(2)}`;
 }
+
+checkoutButton.addEventListener("click", () => {
+    if (cart.length === 0) {
+        return;
+    }
+
+    renderCheckout();
+
+    checkoutPanel.classList.remove("hidden");
+    cartPanel.classList.add("hidden");
+});
+
+checkoutClose.addEventListener("click", () => {
+    checkoutPanel.classList.add("hidden");
+});
+
+checkoutForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    cart.length = 0;
+
+    saveCart();
+    updateCartCount();
+    renderCart();
+
+    checkoutForm.reset();
+
+    orderMessage.textContent = "Order placed successfully!";
+
+    setTimeout(() => {
+        checkoutPanel.classList.add("hidden");
+        orderMessage.textContent = "";
+    }, 2000);
+});
 
 cartItems.addEventListener("click", (event) => {
     const button = event.target.closest("[data-cart-action]");
@@ -173,11 +239,11 @@ cartItems.addEventListener("click", (event) => {
     }
 
     if (action === "decrease") {
-    if (cartItem.quantity > 1) {
-        cartItem.quantity--;
-    } else {
-        const itemIndex = cart.findIndex((item) => {
-            return item.id === itemId;
+        if (cartItem.quantity > 1) {
+            cartItem.quantity--;
+        } else {
+            const itemIndex = cart.findIndex((item) => {
+                return item.id === itemId;
         });
 
         cart.splice(itemIndex, 1);
@@ -277,6 +343,4 @@ foodGrid.addEventListener("click", (event) => {
     updateCartCount();
     renderCart();
     saveCart();
-    
-    console.log(cart);
 });
