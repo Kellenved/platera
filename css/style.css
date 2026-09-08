@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     margin: 0;
     font-family: Arial, sans-serif;
@@ -387,6 +391,57 @@ nav a:hover{
     display: none;
 }
 
+/* About */
+.about{
+    margin-top: 70px;
+    padding: 70px 0;
+    border-top: 1px solid #eee;
+}
+
+.about-content{
+    max-width: 700px;
+}
+
+.section-label{
+    margin: 0 0 10px;
+    color: #d94f30;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.about h2{
+    margin: 0 0 18px;
+    font-size: 2.6rem;
+    line-height: 1.15;
+}
+
+.about-content > p:last-child{
+    margin: 0;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Footer */
+footer{
+    margin-top: 0;
+    padding: 32px 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-content p{
+    margin: 0;
+    color: #666;
+}
+
 /* Responsive */
 @media (max-width: 900px){
     .food-grid{
@@ -432,4 +487,18 @@ nav a:hover{
         width: auto;
         top: 70px;
     }
+
+    .about{
+    margin-top: 40px;
+    padding-block: 60px;
+}
+
+.about h2{
+    font-size: 2rem;
+}
+
+.footer-content{
+    flex-direction: column;
+    align-items: flex-start;
+}
 }
