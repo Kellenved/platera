@@ -161,6 +161,12 @@ nav a:hover{
     border-color: #d94f30;
 }
 
+.category-list button.active{
+    background: #d94f30;
+    color: white;
+    border-color: #d94f30;
+}
+
 /* Food grid */
 .food-grid{
     display: grid;

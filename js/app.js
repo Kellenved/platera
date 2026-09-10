@@ -272,18 +272,24 @@ const categoryButtons = document.querySelectorAll("[data-category]");
 const searchForm = document.querySelector(".search-form");
 const searchInput = document.querySelector("#food-search");
 
-categoryButtons.forEach((button) =>{
-    button.addEventListener("click", () =>{
+categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+
+        categoryButtons.forEach((categoryButton) => {
+            categoryButton.classList.remove("active");
+        });
+
+        button.classList.add("active");
 
         const selectedCategory = button.dataset.category;
 
-        if (selectedCategory === "all"){
+        if (selectedCategory === "all") {
             renderFoods(foods);
-        } else{
-            const filteredFoods = foods.filter((food) =>{
+        } else {
+            const filteredFoods = foods.filter((food) => {
                 return food.category === selectedCategory;
             });
-            
+
             renderFoods(filteredFoods);
         }
     });
