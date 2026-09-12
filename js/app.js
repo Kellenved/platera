@@ -53,6 +53,9 @@ const cartTotal = document.querySelector(".cart-total");
 
 const cartPanel = document.querySelector(".cart-panel");
 
+let selectedCategory = "all";
+let searchTerm = "";
+
 function renderFoods(foodList){
 
     foodGrid.innerHTML = "";
@@ -92,6 +95,21 @@ function renderFoods(foodList){
 
         foodGrid.appendChild(card);
     });
+}
+
+function filterFoods() {
+    const filteredFoods = foods.filter((food) => {
+        const matchesCategory =
+            selectedCategory === "all" ||
+            food.category === selectedCategory;
+
+        const matchesSearch =
+            food.name.toLowerCase().includes(searchTerm);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    renderFoods(filteredFoods);
 }
 
 function saveCart() {
@@ -281,30 +299,18 @@ categoryButtons.forEach((button) => {
 
         button.classList.add("active");
 
-        const selectedCategory = button.dataset.category;
+        selectedCategory = button.dataset.category;
 
-        if (selectedCategory === "all") {
-            renderFoods(foods);
-        } else {
-            const filteredFoods = foods.filter((food) => {
-                return food.category === selectedCategory;
-            });
-
-            renderFoods(filteredFoods);
-        }
+        filterFoods();
     });
 });
 
-searchForm.addEventListener("submit", (event) =>{
+searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const searchTerm = searchInput.value.trim().toLowerCase();
+    searchTerm = searchInput.value.trim().toLowerCase();
 
-    const filteredFoods = foods.filter((food) =>{
-        return food.name.toLowerCase().includes(searchTerm);
-    });
-
-    renderFoods(filteredFoods);
+    filterFoods();
 });
 
 function updateCartCount() {
