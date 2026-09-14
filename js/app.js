@@ -305,12 +305,14 @@ categoryButtons.forEach((button) => {
     });
 });
 
-searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
+searchInput.addEventListener("input", () => {
     searchTerm = searchInput.value.trim().toLowerCase();
 
     filterFoods();
+});
+
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 });
 
 function updateCartCount() {
