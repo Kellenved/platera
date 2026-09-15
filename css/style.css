@@ -555,3 +555,29 @@ footer{
         align-items: flex-start;
     }
 }
+
+.food-card-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.food-card-title h3{
+    margin: 0;
+}
+
+.favorite-button{
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: #d94f30;
+    padding: 4px;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.favorite-button:hover{
+    transform: scale(1.15);
+}

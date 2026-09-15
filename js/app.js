@@ -38,6 +38,9 @@ const foods = [
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+const favorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
 const checkoutButton = document.querySelector(".checkout-button");
 const checkoutPanel = document.querySelector(".checkout-panel");
 const checkoutClose = document.querySelector(".checkout-close");
@@ -55,6 +58,10 @@ const cartPanel = document.querySelector(".cart-panel");
 
 let selectedCategory = "all";
 let searchTerm = "";
+
+function saveFavorites() {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
 
 function renderFoods(foodList){
 
@@ -79,7 +86,18 @@ function renderFoods(foodList){
             <div class="food-card-content">
                 <p class="food-category">${food.category}</p>
 
-                <h3>${food.name}</h3>
+                <div class="food-card-title">
+                    <h3>${food.name}</h3>
+
+                    <button
+                        type="button"
+                        class="favorite-button"
+                        data-favorite-id="${food.id}"
+                        aria-label="Add ${food.name} to favorites"
+                    >
+                        ${favorites.includes(food.id) ? "♥" : "♡"}
+                    </button>
+                </div>
 
                 <p>${food.description}</p>
 
@@ -357,4 +375,25 @@ foodGrid.addEventListener("click", (event) => {
     updateCartCount();
     renderCart();
     saveCart();
+});
+
+foodGrid.addEventListener("click", (event) => {
+    const favoriteButton = event.target.closest("[data-favorite-id]");
+
+    if (!favoriteButton) {
+        return;
+    }
+
+    const foodId = Number(favoriteButton.dataset.favoriteId);
+
+    const favoriteIndex = favorites.indexOf(foodId);
+
+    if (favoriteIndex === -1) {
+        favorites.push(foodId);
+    } else {
+        favorites.splice(favoriteIndex, 1);
+    }
+
+    saveFavorites();
+    filterFoods();
 });
