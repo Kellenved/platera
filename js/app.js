@@ -117,9 +117,15 @@ function renderFoods(foodList){
 
 function filterFoods() {
     const filteredFoods = foods.filter((food) => {
-        const matchesCategory =
-            selectedCategory === "all" ||
-            food.category === selectedCategory;
+        let matchesCategory;
+
+        if (selectedCategory === "favorites") {
+            matchesCategory = favorites.includes(food.id);
+        } else {
+            matchesCategory =
+                selectedCategory === "all" ||
+                food.category === selectedCategory;
+        }
 
         const matchesSearch =
             food.name.toLowerCase().includes(searchTerm);
