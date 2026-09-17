@@ -9,19 +9,19 @@
     },
     {
         "id": 2,
-        "name": "Classic Burger",
+        "name": "Halloumi Burger",
         "category": "burgers",
-        "description": "Juicy beef patty with lettuce, tomato and cheese.",
+        "description": "Grilled halloumi with lettuce, tomato and house sauce.",
         "price": 10.99,
-        "image": "./assets/images/burger.jpg"
+        "image": "./assets/images/halloumi-burger.jpg"
     },
     {
         "id": 3,
-        "name": "Carbonara",
+        "name": "Mushroom Carbonara",
         "category": "pasta",
-        "description": "Creamy pasta with pancetta, parmesan and black pepper.",
+        "description": "Creamy pasta with mushrooms, parmesan and black pepper.",
         "price": 13.99,
-        "image": "./assets/images/pasta.jpg"
+        "image": "./assets/images/mushroom-carbonara.jpg"
     },
     {
         "id": 4,
@@ -30,5 +30,69 @@
         "description": "Refreshing homemade lemonade with fresh strawberries.",
         "price": 4.99,
         "image": "./assets/images/drink.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Four Cheese Pizza",
+        "category": "pizza",
+        "description": "Mozzarella, parmesan, gorgonzola and provolone.",
+        "price": 14.99,
+        "image": "./assets/images/four-cheese-pizza.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Grilled Veggie Pizza",
+        "category": "pizza",
+        "description": "Mozzarella, peppers, zucchini, mushrooms and red onion.",
+        "price": 14.49,
+        "image": "./assets/images/veggie-pizza.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Crispy Veggie Burger",
+        "category": "burgers",
+        "description": "Crispy vegetable patty with lettuce, tomato and garlic sauce.",
+        "price": 11.49,
+        "image": "./assets/images/crispy-veggie-burger.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Avocado Veggie Burger",
+        "category": "burgers",
+        "description": "Vegetable patty with avocado, lettuce, tomato and red onion.",
+        "price": 10.49,
+        "image": "./assets/images/veggie-burger.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Tomato Bolognese",
+        "category": "pasta",
+        "description": "Pasta with a rich tomato, lentil and vegetable sauce.",
+        "price": 13.49,
+        "image": "./assets/images/tomato-bolognese.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Pesto Pasta",
+        "category": "pasta",
+        "description": "Pasta tossed with basil pesto, parmesan and cherry tomatoes.",
+        "price": 12.99,
+        "image": "./assets/images/pesto-pasta.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Peach Iced Tea",
+        "category": "drinks",
+        "description": "Refreshing iced tea with sweet peach flavor.",
+        "price": 3.99,
+        "image": "./assets/images/iced-tea.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Cola",
+        "category": "drinks",
+        "description": "Ice-cold classic cola.",
+        "price": 2.99,
+        "image": "./assets/images/cola.jpg"
     }
 ]
