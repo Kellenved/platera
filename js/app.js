@@ -1,40 +1,4 @@
-const foods = [
-    {
-        id: 1,
-        name: "Pizza Margherita",
-        category: "pizza",
-        description: "Fresh tomatoes, mozzarella and basil.",
-        price: 12.99,
-        image: "./assets/images/pizza.jpg"
-    },
-
-    {
-        id: 2,
-        name: "Classic Burger",
-        category: "burgers",
-        description: "Juicy beef patty with lettuce, tomato and cheese.",
-        price: 10.99,
-        image: "./assets/images/burger.jpg"
-    },
-
-    {
-        id: 3,
-        name: "Carbonara",
-        category: "pasta",
-        description: "Creamy pasta with pancetta, parmesan and black pepper.",
-        price: 13.99,
-        image: "./assets/images/pasta.jpg"
-    },
-
-    {
-        id: 4,
-        name: "Strawberry Lemonade",
-        category: "drinks",
-        description: "Refreshing homemade lemonade with fresh strawberries.",
-        price: 4.99,
-        image: "./assets/images/drink.jpg"
-    }
-];
+let foods = [];
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -138,11 +102,7 @@ function filterFoods() {
 
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-renderFoods(foods);
-updateCartCount();
-renderCart();
+};
 
 function renderCheckout() {
     checkoutSummary.innerHTML = "";
@@ -169,7 +129,7 @@ function getCartTotal() {
     return cart.reduce((sum, item) => {
         return sum + item.price * item.quantity;
     }, 0);
-};
+}
 
 function renderCart() {
     cartItems.innerHTML = "";
@@ -403,3 +363,27 @@ foodGrid.addEventListener("click", (event) => {
     saveFavorites();
     filterFoods();
 });
+
+async function loadFoods() {
+    try {
+        const response = await fetch("./data/foods.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load foods.");
+        }
+
+        foods = await response.json();
+
+        renderFoods(foods);
+    } catch (error) {
+        console.error(error);
+
+        foodGrid.innerHTML = `
+            <p>Sorry, we couldn't load the menu.</p>
+        `;
+    }
+}
+
+loadFoods();
+updateCartCount();
+renderCart();

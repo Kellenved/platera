@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Pizza Margherita",
+        "category": "pizza",
+        "description": "Fresh tomatoes, mozzarella and basil.",
+        "price": 12.99,
+        "image": "./assets/images/pizza.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Classic Burger",
+        "category": "burgers",
+        "description": "Juicy beef patty with lettuce, tomato and cheese.",
+        "price": 10.99,
+        "image": "./assets/images/burger.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Carbonara",
+        "category": "pasta",
+        "description": "Creamy pasta with pancetta, parmesan and black pepper.",
+        "price": 13.99,
+        "image": "./assets/images/pasta.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Strawberry Lemonade",
+        "category": "drinks",
+        "description": "Refreshing homemade lemonade with fresh strawberries.",
+        "price": 4.99,
+        "image": "./assets/images/drink.jpg"
+    }
+]
